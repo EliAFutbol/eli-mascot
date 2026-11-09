@@ -1,0 +1,5 @@
+{
+  "name": "eli-mascot",
+  "owner": { "name": "Eli" },
+  "plugins": [{ "name": "eli-mascot", "source": "./", "description": "Eli, an animated mascot that reacts to what Claude is doing" }]
+}
