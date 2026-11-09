@@ -1,1 +1,1 @@
-{ "name": "eli-mascot", "version": "0.1.0", "description": "Eli, an animated mascot that reacts to what Claude is doing", "types": "./types/index.d.ts" }
+{ "name": "eli-mascot", "version": "0.2.0", "description": "Eli, an animated mascot that reacts to what Claude is doing", "types": "./types/index.d.ts" }

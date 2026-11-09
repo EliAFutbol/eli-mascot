@@ -4,8 +4,6 @@ import type { EngineInterface, Register } from 'claude-code'
 import type { Mood } from '../types'
 import { FRAMES } from './frames'
 
-const PANE = 'eli'
-const TITLE = 'Eli'
 const LABEL: Record<Mood, string> = {
   idle: 'Eli is hanging out',
   wave: 'Eli says hi',
@@ -41,17 +39,9 @@ export const register: Register = on => {
   let toolsRunning = 0
 
   on('session.start', async ($, e, next) => {
-    await $.command.register({ name: 'eli', description: 'Open Eli, your mascot, in a bigger side pane' })
     await show($, 'wave', 3500)
 
     return next(e)
-  })
-
-  on('command.run', { command: 'eli' }, async $ => {
-    await $.ui.open({ id: PANE, title: TITLE })
-    await show($, 'wave', 3000)
-
-    return { text: 'Eli is here.' }
   })
 
   on('turn.start', async ($, e, next) => {
@@ -101,23 +91,6 @@ export const register: Register = on => {
     return (
       <Box flexDirection="row" alignItems="flex-end">
         <ui.Svg source={FRAMES[now]} alt={LABEL[now]} width={widthAt(now, 88)} height={88} isInteractive />
-        <Text dimColor>{LABEL[now]}</Text>
-      </Box>
-    )
-  })
-
-  on('ui.render', { component: 'Pane', requestId: PANE }, async ($, e) => {
-    const ui = $.ui.resolve(e)
-    const { Box, Text } = ui
-    const now = await read($, mood)
-
-    return (
-      <Box flexDirection="column" alignItems="center">
-        {'Svg' in ui ? (
-          <ui.Svg source={FRAMES[now]} alt={LABEL[now]} width={widthAt(now, 200)} height={200} isInteractive />
-        ) : (
-          <Text>(•‿•) Eli</Text>
-        )}
         <Text dimColor>{LABEL[now]}</Text>
       </Box>
     )
